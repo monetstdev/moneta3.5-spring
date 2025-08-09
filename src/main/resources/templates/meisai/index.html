@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/application}">
+
+<body>
+	<div layout:fragment="body">
+		<div class="grid grid-cols-4 bg-gray-200 rounded p-8">
+			<div class="text-4xl col-span-3">取引明細</div>
+			<img th:src="@{/images/money_satsutaba.png}" class="w-24 h-24" />
+		</div>
+
+		<div class="text-4xl mt-8">普通預金</div>
+
+		<div class="mx-auto py-2">
+			<div class="grid grid-cols-6 border-t-2 border-gray-200">
+				<div class="font-bold p-2">銀行</div>
+				<div class="font-bold p-2">支店</div>
+				<div class="font-bold p-2">口座番号</div>
+				<div class="font-bold p-2">残高</div>
+				<div class="font-bold p-2">利用可能額</div>
+				<div class="font-bold p-2"></div>
+			</div>
+
+			<div class="grid grid-cols-6 border-t-2 border-gray-200">
+				<div class="p-2" th:text="${Bank[kouza.bank_bangou].kanji_name}"></div>
+				<div class="p-2" th:text="${Shiten[kouza.shiten_bangou].kanji_name}"></div>
+				<div class="p-2" th:text="${kouza.bangou}"></div>
+				<div class="p-2" th:text="${#numbers.formatInteger(kouza.zandaka, 3, 'COMMA')} + '円'"></div>
+				<div class="p-2" th:text="${#numbers.formatInteger(kouza.zandaka + 1000000, 3, 'COMMA')} + '円'"></div>
+				<div class="p-2"></div>
+			</div>
+		</div>
+
+		<div class="text-4xl mt-8">明細</div>
+
+		<div class="mx-auto py-2">
+			<div class="grid grid-cols-6 border-t-2 border-gray-200">
+				<div class="font-bold p-1">取引日</div>
+				<div class="font-bold p-1">区分</div>
+				<div class="font-bold p-1">金額</div>
+				<div class="font-bold p-1">差引残高</div>
+				<div class="font-bold p-1 col-span-2">適用</div>
+			</div>
+
+			<div th:each="meisai : ${meisai}" class="grid grid-cols-6 border-t-2 border-gray-200">
+				<div class="my-2 p-1" th:text="${meisai.created_at}"></div>
+				<div class="my-2 p-1" th:text="${meisai.kubun}"></div>
+				<div class="my-2 p-1" th:text="${#numbers.formatInteger(meisai.kingaku, 3, 'COMMA')} + '円'"></div>
+				<div class="my-2 p-1" th:text="${#numbers.formatInteger(meisai.saishozandaka, 3, 'COMMA')} + '円'"></div>
+				<div class="my-2 p-1 col-span-2" th:text="${meisai.tekiyou}"></div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

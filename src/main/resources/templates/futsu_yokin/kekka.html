@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/application}">
+
+<body>
+	<div layout:fragment="body" class="container mx-auto w-[480px] mt-4 p-8 bg-gray-200 rounded">
+		<div class="text-4xl">普通預金を開設しました</div>
+		<div class="grid grid-cols-3 my-4">
+
+			<div class="col-span-1 p-2">銀行名</div>
+			<div class="col-span-2 p-2" th:text="${Bank[ kouza.bank_bangou ].kanji_name}"></div>
+
+			<div class="col-span-1 p-2">支店名</div>
+			<div class="col-span-2 p-2" th:text="${Shiten[ kouza.shiten_bangou ].kanji_name}"></div>
+
+			<div class="col-span-1 p-2">口座番号</div>
+			<div class="col-span-2 p-2" th:text="${kouza.bangou}"></div>
+
+			<div class="col-span-1 p-2">残高</div>
+			<div class="col-span-2 p-2"
+				th:text="${#numbers.formatDecimal(kouza.zandaka, 0, 'COMMA', 0, 'POINT') + '円'}"></div>
+
+			<div class="col-span-1 p-2">貸越可能金額</div>
+			<div class="col-span-2 p-2"
+				th:text="${#numbers.formatDecimal(kouza.zandaka + 1000000, 0, 'COMMA', 0, 'POINT') + '円'}"></div>
+		</div>
+
+		<a href="/mypage" class="bg-blue-500 hover:bg-blue-300 text-white rounded p-2 my-8">
+			マイページへ
+		</a>
+	</div>
+</body>
+
+</html>

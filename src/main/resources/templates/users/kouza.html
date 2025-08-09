@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/application}">
+
+<body>
+  <div layout:fragment="body">
+    <div class="grid grid-cols-4 bg-gray-200 rounded p-8">
+      <div class="text-4xl col-span-3">残高一覧</div>
+      <img th:src="@{/images/money_satsutaba.png}" class="w-24 h-24" />
+    </div>
+
+    <div class="text-4xl mt-8">普通預金</div>
+
+    <div class="mx-auto py-2">
+      <div class="grid grid-cols-6 border-t-2 border-gray-200">
+        <div class="font-bold p-2">銀行</div>
+        <div class="font-bold p-2">支店</div>
+        <div class="font-bold p-2">口座番号</div>
+        <div class="font-bold p-2">残高</div>
+        <div class="font-bold p-2">利用可能額</div>
+        <div class="font-bold p-2"></div>
+      </div>
+
+      <div th:each="kouza : ${kouzaList}" class="grid grid-cols-6 border-t-2 border-gray-200">
+        <div class="p-2" th:text="${Bank[kouza['bank_bangou']].kanji_name}"></div>
+        <div class="p-2" th:text="${Shiten[kouza['shiten_bangou']].kanji_name}"></div>
+        <div class="p-2" th:text="${kouza.bangou}"></div>
+        <div class="p-2" th:text="${#numbers.formatInteger(kouza.zandaka, 3, 'COMMA')} + '円'"></div>
+        <div class="p-2" th:text="${#numbers.formatInteger(kouza.zandaka + 1000000, 3, 'COMMA')} + '円'"></div>
+        <a th:href="@{'/meisai/' + ${kouza.id}}"
+           class="my-2 mx-8 p-1 bg-blue-500 hover:bg-blue-300 text-white text-xs text-center rounded">照会</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

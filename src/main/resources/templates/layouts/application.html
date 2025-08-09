@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>もねた銀行</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<link rel="stylesheet" th:href="@{/css/tailwind.css}">
+</head>
+
+<body>
+	<!-- ナビゲーションバー -->
+	<div class="flex p-4 bg-gray-800">
+		<span class="flex-none mr-3">
+			<img th:src="@{/images/money_satsutaba.png}" class="w-7 h-7" />
+		</span>
+		<a href="/mypage" class="flex-none text-xl text-white">もねた銀行</a>
+
+		<a th:if="${session.user != null}" href="/logoff" class="flex-1 text-right text-white">Logoff</a>
+		<a th:unless="${session.user != null}" href="/top" class="flex-1 text-right text-white">Logon</a>
+	</div>
+
+	<main class="container mx-auto mt-4 px-6">
+		<!-- フラッシュメッセージ -->
+		<div th:each="flash : ${session.flash}">
+			<div th:if="${flash.key == 'alert'}" class="bg-red-200 text-red-700 p-2 m-2 rounded"
+				th:text="${flash.value}"></div>
+			<div th:if="${flash.key != 'alert'}" class="bg-green-200 text-green-700 p-2 m-2 rounded"
+				th:text="${flash.value}"></div>
+		</div>
+
+		<!-- 本文 -->
+		<section layout:fragment="body">
+	</main>
+</body>
+
+</html>

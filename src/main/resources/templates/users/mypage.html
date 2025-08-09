@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/application}">
+<body>
+  <div layout:fragment="body">
+
+    <!-- ヘッダ部 -->
+    <div class="grid grid-cols-6 bg-gray-200 rounded">
+      <div class="col-span-4">
+        <div class="text-6xl font-bold mt-12 ml-8" th:text="${user.kanjiName} + '様'">〇〇様</div>
+        <div class="text-2xl mt-2 mb-12 ml-8">いつもご利用ありがとうございます</div>
+      </div>
+      <div class="col-span-2">
+        <img th:src="@{/images/logo_mo.png}" class="p-12" alt="もねたロゴ">
+      </div>
+    </div>
+
+    <!-- メニュー部 -->
+    <div class="grid gap-6 grid-cols-3 mt-8">
+      <div class="flex flex-col border border-gray-300 rounded p-4">
+        <div class="flex-none text-2xl">入出金明細</div>
+        <div class="flex-grow my-4"></div>
+        <a href="/kouza" class="flex-none bg-blue-500 hover:bg-blue-300 text-white rounded px-4 py-2 text-center">お手続きへ</a>
+      </div>
+
+      <div class="flex flex-col border border-gray-300 rounded p-4">
+        <div class="flex-none text-2xl">口座開設</div>
+        <div class="flex-grow my-4"></div>
+        <a href="/futsu_yokin/new" class="flex-none bg-blue-500 hover:bg-blue-300 text-white rounded px-4 py-2 text-center">お手続きへ</a>
+      </div>
+
+      <div class="flex flex-col border border-gray-300 rounded p-4">
+        <div class="flex-none text-2xl">振込</div>
+        <div class="flex-grow my-4"></div>
+        <a href="/furikomi/select_moto_kouza" class="flex-none bg-blue-500 hover:bg-blue-300 text-white rounded px-4 py-2 text-center">お手続きへ</a>
+      </div>
+
+      <div class="flex flex-col border border-gray-300 rounded p-4">
+        <div class="flex-none text-2xl">ローン</div>
+        <div class="flex-grow my-4"></div>
+        <a href="/loan/new" class="flex-none bg-blue-500 hover:bg-blue-300 text-white rounded px-4 py-2 text-center">お手続きへ</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
